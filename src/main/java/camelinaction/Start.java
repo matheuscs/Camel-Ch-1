@@ -1,14 +1,19 @@
 package camelinaction;
 
+
+
 import org.apache.camel.CamelContext;
 import org.apache.camel.impl.DefaultCamelContext;
 import javax.jms.ConnectionFactory;
 import org.apache.camel.component.jms.JmsComponent;
 import org.apache.activemq.ActiveMQConnectionFactory;
 
+
 public class Start {
 	public static void main(String[] args) {
-		FirstRouteBuilder routeBuilder = new FirstRouteBuilder();
+
+		//Crio a rota que a mensagem ira seguir
+		ConstrutorRotas routeBuilder = new ConstrutorRotas();
 		
 		//Cria o contexto do Camel para este execução
 		CamelContext ctx = new DefaultCamelContext();
@@ -21,6 +26,7 @@ public class Start {
         ctx.addComponent("jms", JmsComponent.jmsComponentAutoAcknowledge(connFact));
         
 		try {
+			// executo a rota criada acima
 			ctx.addRoutes(routeBuilder);
 			ctx.start();
 			Thread.sleep(5 * 60 * 1000);
