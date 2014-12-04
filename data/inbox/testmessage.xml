@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<order>
-  <item>
-    <name>Cambio</name>
-    <amount>5</amount>
-    <customer>Honda</customer>
-    <test>true</test>
-  </item>
-</order>
