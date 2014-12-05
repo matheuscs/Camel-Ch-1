@@ -20,7 +20,8 @@ public class ConstrutorRotas extends RouteBuilder {
 					.when(header("CamelFileName").endsWith(".csv"))
 						.to("jms:incomingOrdersCSV")
 					.otherwise()
-						.to("jms:invalidOrders");
+						// coloco a mensagem no destino final
+						.to("file:" + invalido);
 
 		// Retiro a mensagem da fila
 		from("jms:incomingOrdersXML")
@@ -38,12 +39,6 @@ public class ConstrutorRotas extends RouteBuilder {
 				// impeço o roteamento futuro desta mensagem
 				.end();
 		
-		// Retiro a mensagem da fila
-		from("jms:invalidOrders")
-				// coloco a mensagem no destino final
-				.to("file:" + invalido)
-				// impeço o roteamento futuro desta mensagem
-				.end();
 	}
 
 }
